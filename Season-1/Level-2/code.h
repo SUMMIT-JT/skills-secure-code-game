@@ -82,9 +82,13 @@ bool update_setting(int user_id, const char *index, const char *value) {
     v = strtol(value, &endptr, 10);
     if (*endptr || i >= SETTINGS_COUNT)
         return false;
+    if (i < 0) {
+        return false;
+    }
     accounts[user_id]->setting[i] = v;
     return true;
 }
+
 
 // Returns whether the specified user is an admin
 bool is_admin(int user_id) {
